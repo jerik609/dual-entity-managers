@@ -1,10 +1,12 @@
 package com.example.dual_entity_managers.configurations;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -13,13 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.util.Map;
 
-//@Configuration
-//@EnableTransactionManagement
-//@EnableJpaRepositories(
-//        entityManagerFactoryRef = "barEntityManagerFactory",
-//        transactionManagerRef = "barTransactionManager",
-//        basePackages = { "com.sctrcd.multidsdemo.bar.repo" })
-
+@Configuration
 public class SecondEntityManagerConfiguration {
 
     // ============================
@@ -60,16 +56,12 @@ public class SecondEntityManagerConfiguration {
             @Qualifier("secondEntityManagerFactoryBuilder") EntityManagerFactoryBuilder entityManagerFactoryBuilder,
             @Qualifier("secondDataSource") DataSource dataSource) {
 
-        return entityManagerFactoryBuilder.dataSource(dataSource).build();
+        final var localContainerEntityManagerFactoryBean = entityManagerFactoryBuilder.dataSource(dataSource).build();
 
-        //        final var localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-//        localContainerEntityManagerFactoryBean.setDataSource(dataSource);
-//        localContainerEntityManagerFactoryBean.setPackagesToScan("com.example.spring_databases_playground.entities");
-//
-//        localContainerEntityManagerFactoryBean.setPersistenceUnitManager(x);
-//        localContainerEntityManagerFactoryBean.setPersistenceUnitName("second");
-//        localContainerEntityManagerFactoryBean.afterPropertiesSet();
-//        return localContainerEntityManagerFactoryBean.getObject();
+        localContainerEntityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+        localContainerEntityManagerFactoryBean.afterPropertiesSet();
+
+        return localContainerEntityManagerFactoryBean;
     }
 
     // transaction manager (because we want to handle transactions on this datasource separately)

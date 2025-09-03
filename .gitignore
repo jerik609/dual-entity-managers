@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/dual-entity-managers.log

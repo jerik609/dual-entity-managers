@@ -15,12 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-//@EnableTransactionManagement
-//@EnableJpaRepositories(
-//        entityManagerFactoryRef = "barEntityManagerFactory",
-//        transactionManagerRef = "barTransactionManager",
-//        basePackages = { "com.sctrcd.multidsdemo.bar.repo" })
-
 public class FirstEntityManagerConfiguration {
 
     // ============================
@@ -48,26 +42,21 @@ public class FirstEntityManagerConfiguration {
     }
 
     // the entity manager factory
-
     @Bean("firstEntityManagerFactory")
     EntityManagerFactory firstEntityManagerFactory(@Qualifier("firstDataSource") DataSource dataSource) {
         final var localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource);
         localContainerEntityManagerFactoryBean.setPackagesToScan("com.example.spring_databases_playground.entities");
 
-        Map<String, Object> jpaProperties = new HashMap<>();
-        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+//        Map<String, Object> jpaProperties = new HashMap<>();
+//        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+//        localContainerEntityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
 
         //** Set the JPA provider explicitly (Hibernate)
         localContainerEntityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        localContainerEntityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
 
-//        final var x = new DefaultPersistenceUnitManager();
-//        x.setDefaultPersistenceUnitName("first");
-//        x.afterPropertiesSet();
-//
-//        localContainerEntityManagerFactoryBean.setPersistenceUnitManager(x);
-//        localContainerEntityManagerFactoryBean.setPersistenceUnitName("first");
+        // weird - END
+
         localContainerEntityManagerFactoryBean.afterPropertiesSet();
         return localContainerEntityManagerFactoryBean.getObject();
     }
@@ -79,14 +68,5 @@ public class FirstEntityManagerConfiguration {
     PlatformTransactionManager firstTransactionManager(@Qualifier("firstEntityManagerFactory")EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
-
-    // ========================
-    // ------------------------
-    // THE SECOND ENTITY MANAGER
-
-    // @Bean
-    //public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
-    //    return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap<>(), null);
-    //}
 
 }
