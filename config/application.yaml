@@ -1,0 +1,25 @@
+spring:
+  shell:
+    interactive:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        jdbc: DEBUG
+        transaction: DEBUG
+        orm:
+          jpa: DEBUG
+      postgres: DEBUG
+
+custom:
+  unicorns:
+    url: jdbc:postgresql://localhost:5432/playground?currentSchema=unicorns
+    username: postgres
+    password: password
+  unicorns2:
+    url: jdbc:postgresql://localhost:5432/playground?currentSchema=unicorns2
+    username: postgres
+    password: password
