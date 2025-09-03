@@ -2,6 +2,10 @@ spring:
   shell:
     interactive:
       enabled: true
+  data:
+    jpa:
+      repositories:
+        enabled: false
 
 logging:
   level:
@@ -23,3 +27,4 @@ custom:
     url: jdbc:postgresql://localhost:5432/playground?currentSchema=unicorns2
     username: postgres
     password: password
+

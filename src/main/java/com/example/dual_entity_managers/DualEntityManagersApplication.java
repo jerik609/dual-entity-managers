@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfig
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication(
-        exclude = {JpaRepositoriesAutoConfiguration.class}
+        //exclude = {JpaRepositoriesAutoConfiguration.class}
 )
 @EnableConfigurationProperties({DataSourceProperties.FirstProperties.class, DataSourceProperties.SecondProperties.class})
 public class DualEntityManagersApplication {
