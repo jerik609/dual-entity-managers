@@ -56,12 +56,24 @@ public class SecondEntityManagerConfiguration {
             @Qualifier("secondEntityManagerFactoryBuilder") EntityManagerFactoryBuilder entityManagerFactoryBuilder,
             @Qualifier("secondDataSource") DataSource dataSource) {
 
-        final var localContainerEntityManagerFactoryBean = entityManagerFactoryBuilder.dataSource(dataSource).build();
+        final var builder = entityManagerFactoryBuilder.dataSource(dataSource);
 
-        localContainerEntityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        localContainerEntityManagerFactoryBean.afterPropertiesSet();
+        // damn, it shuts up when scanning is enforced :-)
+        builder.packages("com.example.dual_entity_managers.model");
 
-        return localContainerEntityManagerFactoryBean;
+        //.build();
+
+        System.out.println("before!!!");
+
+        final var theThing = builder.build();
+
+        System.out.println("after!!!");
+
+
+//        localContainerEntityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+//        localContainerEntityManagerFactoryBean.afterPropertiesSet();
+
+        return theThing;
     }
 
     // transaction manager (because we want to handle transactions on this datasource separately)
