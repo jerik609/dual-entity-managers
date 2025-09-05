@@ -47,6 +47,6 @@ modified timestamp not null
 - https://stackoverflow.com/questions/53934077/spring-boot-jpa-set-custom-datasource
 - https://docs.spring.io/spring-boot/how-to/data-access.html#howto.data-access.configure-two-datasources
 
-### Link from debugging
+### Links from debugging
 - https://stackoverflow.com/questions/46574686/spring-boot-2-0-0-m4-hibernate-5-2-11-final-could-not-find-bean-of-type-entity/51305724#51305724
 - https://stackoverflow.com/questions/1965454/showing-a-spring-transaction-in-log
