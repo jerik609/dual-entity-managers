@@ -1,4 +1,4 @@
-# Demonstrates the usage of two distinct entity managers for two distinct JPA repositories
+# Demonstrates the usage of two entity managers for two distinct JPA repositories
 
 ## Solution
 Basically this: 
