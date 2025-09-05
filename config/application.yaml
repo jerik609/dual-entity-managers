@@ -5,26 +5,25 @@ spring:
   data:
     jpa:
       repositories:
-        enabled: false
+        enabled: true
 
 logging:
   level:
     root: INFO
     org:
       springframework:
-        jdbc: DEBUG
-        transaction: DEBUG
+        jdbc: TRACE
+        transaction: TRACE
         orm:
-          jpa: DEBUG
-      postgres: DEBUG
+          jpa: TRACE
+      postgres: TRACE
 
 custom:
-  unicorns:
-    url: jdbc:postgresql://localhost:5432/playground?currentSchema=unicorns
+  first:
+    url: jdbc:postgresql://localhost:5432/playground?currentSchema=example
     username: postgres
     password: password
-  unicorns2:
-    url: jdbc:postgresql://localhost:5432/playground?currentSchema=unicorns2
+  second:
+    url: jdbc:postgresql://localhost:5432/playground?currentSchema=example
     username: postgres
     password: password
-
