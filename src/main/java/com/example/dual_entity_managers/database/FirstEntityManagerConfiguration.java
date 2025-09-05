@@ -2,6 +2,7 @@ package com.example.dual_entity_managers.database;
 
 import com.example.dual_entity_managers.repos.first.FirstRepository;
 import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -37,9 +38,10 @@ public class FirstEntityManagerConfiguration {
             @Qualifier("firstDataSource") DataSource dataSource) {
         final var localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource);
-        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        localContainerEntityManagerFactoryBean.setPackagesToScan("com.example.dual_entity_managers.model"); // without this, the persistence unit will not be established
-        localContainerEntityManagerFactoryBean.setPersistenceUnitName("firstPU");
+        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter()); // instantiates the persistence provider
+        //localContainerEntityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class); // also works, but who knows which default were not initialized if used instead of jpa vendor adapter
+        localContainerEntityManagerFactoryBean.setPackagesToScan("com.example.dual_entity_managers.model"); // searches for manager entities, instead of using persistence.xml
+        localContainerEntityManagerFactoryBean.setPersistenceUnitName("firstPU"); // optional
         return localContainerEntityManagerFactoryBean;
     }
 

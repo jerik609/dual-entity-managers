@@ -25,7 +25,7 @@ public class DualEntityManagersService {
         this.secondRepository = secondRepository;
     }
 
-    //@Transactional(transactionManager = "firstPlatformTransactionManager")
+    //@Transactional(transactionManager = "firstPlatformTransactionManager") // actually not needed when using JPA repositories
     public void first(String data, String extraData) {
         final var stuff = new First();
         stuff.setData(data);
@@ -34,7 +34,7 @@ public class DualEntityManagersService {
         firstRepository.save(stuff);
     }
 
-    //@Transactional(transactionManager = "secondPlatformTransactionManager")
+    //@Transactional(transactionManager = "secondPlatformTransactionManager") // actually not needed when using JPA repositories
     public void second(String data, String extraData) {
         final var swag = new Second();
         swag.setData(data);
