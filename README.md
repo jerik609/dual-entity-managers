@@ -14,22 +14,21 @@ If a more distinctive setup is used, then we need to prepare all the beans manua
 The Spring Data JPA will still wrap the repositories in transactional proxies using the provided platform transaction managers (they must be of JPA type!).
 
 ## Database
-`
+```
 CREATE TABLE example.first (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   data VARCHAR(256) NOT NULL,
   extended_data VARCHAR(256) NOT NULL,
   modified timestamp not null
 );
-`
-`
+
 CREATE TABLE example.first (
 id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 data VARCHAR(256) NOT NULL,
 extended_data VARCHAR(256) NOT NULL,
 modified timestamp not null
 );
-`
+```
 
 ## Bits and snippets
 1. `@EnableTransactionManagement` is not needed in spring boot, see: https://stackoverflow.com/questions/40724100/enabletransactionmanagement-in-spring-boot
